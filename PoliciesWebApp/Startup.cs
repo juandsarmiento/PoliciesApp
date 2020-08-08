@@ -1,9 +1,6 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.EntityFrameworkCore;
 using PoliciesWebApp.Data;
@@ -12,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PoliciesWebApp.Repo;
+using System;
+using AutoMapper;
 
 namespace PoliciesWebApp
 {
@@ -31,6 +30,7 @@ namespace PoliciesWebApp
                 options.UseSqlServer(
                     Configuration.GetConnectionString("PoliciesConnection")));
 
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<IPoliciesRepo, SqlPoliciesRepo>();
 
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -44,7 +44,7 @@ namespace PoliciesWebApp
 
             services.AddControllersWithViews();
             services.AddRazorPages();
-
+            
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {

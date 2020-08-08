@@ -20,28 +20,34 @@ namespace PoliciesWebApp.Controllers
             _mapper = mapper;
         }
         [HttpGet]
-        public ActionResult<IEnumerable<Policy>> GetAllPolicies()
+        public ActionResult<IEnumerable<PolicyReadableDto>> GetAllPolicies()
         {
-
-            return Ok(_policiesRepo.GetAllPolicies());
+            var policies = _policiesRepo.GetAllPolicies();
+            var mappedPolicies = _mapper.Map<IEnumerable<PolicyReadableDto>>(policies);
+            return Ok(mappedPolicies);
         }
         [HttpGet("{policyId}")]
-        public ActionResult<Policy> GetPolicyById(long policyId)
+        public ActionResult<PolicyReadableDto> GetPolicyById(long policyId)
         {
             var policy = _policiesRepo.GetPolicyById(policyId);
             if (policy != null)
-                return Ok(policy);
-
+            {
+                var mappedPolicy = _mapper.Map<PolicyReadableDto>(policy);
+                
+                return Ok(mappedPolicy);
+            }
+                
             return NotFound();
         }
         [HttpPost]
-        public ActionResult<Policy> CreatePolicy(PolicyCreateDto policy)
+        public ActionResult<PolicyReadableDto> CreatePolicy(PolicyCreateDto policy)
         {
             Policy newPolicy = _mapper.Map<Policy>(policy);
-            return Created("", _policiesRepo.CreatePolicy(newPolicy));
+            var policyCreated = _policiesRepo.CreatePolicy(newPolicy);
+            return Created("", _mapper.Map<PolicyReadableDto>(policyCreated));
         }
         [HttpPut]
-        public ActionResult<Policy> UpdatePolicy(Policy policy)
+        public ActionResult UpdatePolicy(PolicyUpdateDto policy)
         {
             var oldPolicy = _policiesRepo.GetPolicyById(policy.Id);
             if (oldPolicy == null)
@@ -49,7 +55,8 @@ namespace PoliciesWebApp.Controllers
 
                 return NotFound();
             }
-            _policiesRepo.UpdatePolicy(policy);
+            Policy newPolicy = _mapper.Map<Policy>(policy);
+            _policiesRepo.UpdatePolicy(newPolicy);
             return NoContent();
         }
         [HttpDelete("{policyId}")]

@@ -1,13 +1,14 @@
-﻿using PoliciesWebApp.Validations;
+﻿using PoliciesWebApp.Models;
+using PoliciesWebApp.Validations;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace PoliciesWebApp.Models
+namespace PoliciesWebApp.DTOs
 {
-    public class Policy:IPolicy
+    public class PolicyReadableDto
     {
-        [Key]
+        [Required]
         public long Id { get; set; }
         [Required]
         [StringLength(50)]
@@ -25,8 +26,7 @@ namespace PoliciesWebApp.Models
         public decimal Price { get; set; }
         [Required]
         public ERiskTypes RiskId { get; set; }
+        public HashSet<ECoverageTypes> PolicyCoverageTypes { get; set; }
 
-        public ICollection<PolicyCoverageType> PolicyCoverageTypes { get; set; }
-        public ICollection<PolicyClient> PolicyClients { get; set; }
     }
 }

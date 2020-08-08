@@ -18,7 +18,7 @@ namespace PoliciesWebApp.Validations
 
                 return new ValidationResult("coverage must less than or equal to 100");
             }
-            ERiskTypes riskType = ((Policy)validationContext.ObjectInstance).RiskId;
+            ERiskTypes riskType = ((IPolicy)validationContext.ObjectInstance).RiskId;
             if ((float)value > 50 && riskType == ERiskTypes.High)
             {
                 return new ValidationResult("coverage must be less than or equal to 50 when the risk is high");

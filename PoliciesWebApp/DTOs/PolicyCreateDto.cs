@@ -6,10 +6,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PoliciesWebApp.DTOs
 {
-    public class PolicyCreateDto
+    public class PolicyCreateDto: IPolicy
     {
-        [Key]
-        public long Id { get; set; }
         [Required]
         [StringLength(50)]
         public string Name { get; set; }
@@ -28,6 +26,6 @@ namespace PoliciesWebApp.DTOs
         public ERiskTypes RiskId { get; set; }
         [Required]
         [MinLength(1)]
-        public IEnumerable<PolicyCoverageType> PolicyCoverageTypes { get; set; }
+        public HashSet<ECoverageTypes> PolicyCoverageTypes { get; set; }
     }
 }

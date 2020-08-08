@@ -7,7 +7,7 @@ using PoliciesWebApp.Models;
 
 namespace PoliciesWebApp.Repo
 {
-    public class SqlPoliciesRepo: IPoliciesRepo
+    public class SqlPoliciesRepo : IPoliciesRepo
     {
         private readonly PoliciesDbContext _policiesDbContext;
         public SqlPoliciesRepo(PoliciesDbContext policiesDbContext)
@@ -21,8 +21,14 @@ namespace PoliciesWebApp.Repo
                 .AsNoTracking()
                 .ToList();
         }
-        public Policy GetPolicyById(long policyId)
+        public Policy GetPolicyById(long policyId, bool tracked = false)
         {
+            if (tracked)
+            {
+                return _policiesDbContext.Policies
+                .Include(p => p.PolicyCoverageTypes)
+                .FirstOrDefault(p => p.Id == policyId);
+            }
             return _policiesDbContext.Policies
                 .Include(p => p.PolicyCoverageTypes)
                 .AsNoTracking()
@@ -59,5 +65,30 @@ namespace PoliciesWebApp.Repo
         {
             throw new NotImplementedException();
         }
+        public IEnumerable<RiskType> GetAllRisks()
+        {
+            return _policiesDbContext.Risk
+                .AsNoTracking()
+                .ToList();
+        }
+        public IEnumerable<CoverageType> GetAllCoverages()
+        {
+            return _policiesDbContext.CoverageType
+                .AsNoTracking()
+                .ToList();
+        }
+        public IEnumerable<Client> GetAllClients()
+        {
+            return _policiesDbContext.Clients
+                .Include(c => c.PolicyClients)
+                .AsNoTracking()
+                .ToList();
+        }
+        public void SaveChanges()
+        {
+            _policiesDbContext.SaveChanges();
+        }
+
+        
     }
 }
