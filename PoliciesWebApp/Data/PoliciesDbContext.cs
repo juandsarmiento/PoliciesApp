@@ -51,6 +51,18 @@ namespace PoliciesWebApp.Data
                 .HasOne(p => p.Policy)
                 .WithMany(p => p.PolicyCoverageTypes)
                 .HasForeignKey(p => p.PolicyId);
+
+            //Seeding
+            Seeding seedData = new Seeding();
+            seedData.GetRandomData(out RiskType[] riskType, out CoverageType[] coverageTypes, out Client[] clients, 
+                out Policy[] policies, out PolicyCoverageType[] policyCoverageTypes, out PolicyClient[] policyClients);
+
+            modelBuilder.Entity<RiskType>().HasData(riskType);
+            modelBuilder.Entity<CoverageType>().HasData(coverageTypes);
+            modelBuilder.Entity<Client>().HasData(clients);
+            modelBuilder.Entity<Policy>().HasData(policies);
+            modelBuilder.Entity<PolicyCoverageType>().HasData(policyCoverageTypes);
+            modelBuilder.Entity<PolicyClient>().HasData(policyClients);
         }
     }
 }
