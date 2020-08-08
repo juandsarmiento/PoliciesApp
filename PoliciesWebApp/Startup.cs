@@ -11,6 +11,7 @@ using PoliciesWebApp.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PoliciesWebApp.Repo;
 
 namespace PoliciesWebApp
 {
@@ -29,6 +30,8 @@ namespace PoliciesWebApp
             services.AddDbContext<PoliciesDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("PoliciesConnection")));
+
+            services.AddScoped<IPoliciesRepo, SqlPoliciesRepo>();
 
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<PoliciesDbContext>();
