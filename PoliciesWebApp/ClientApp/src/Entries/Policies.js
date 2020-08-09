@@ -23,13 +23,11 @@ const Policies = ({ policies, isLoading, actions }) => {
     }, [])
 
     const handleDelete = (policy) => {
-        console.log(policy)
         setPolicy2Del({
             modalIsOpen: true,
             policy
         })
     };
-    console.log(policy2Del)
     const handleSubmit = async() => {
         actions.deletePolicy(policy2Del.policy.id);
         setPolicy2Del({...INITIAL_STATE});

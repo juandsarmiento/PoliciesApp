@@ -23,5 +23,17 @@ namespace PoliciesWebApp.Controllers
             var clients = _policiesRepo.GetAllClients();
             return Ok(_mapper.Map<IEnumerable<ClientReadableDto>>(clients));
         }
+        [HttpPatch("{clientId}/cancelpolicies")]
+        public ActionResult CancelPolicy(long clientId, CancelPoliciesClientDto clientPolicies)
+        {
+            _policiesRepo.CancelPoliciesOfClient(clientId, clientPolicies.PoliciesId);
+            return NoContent();
+        }
+        [HttpPatch("{clientId}/assignpolicies")]
+        public ActionResult AssignPolicies(long clientId, CancelPoliciesClientDto clientPolicies)
+        {
+            _policiesRepo.AssignPoliciesOfClient(clientId, clientPolicies.PoliciesId);
+            return NoContent();
+        }
     }
 }

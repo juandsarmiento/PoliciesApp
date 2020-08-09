@@ -38,6 +38,7 @@ class App extends Component {
             <AuthorizeRoute exact path={`${POLICIES_PATH}/:id`} component={EditPolicy} />
             <AuthorizeRoute exact path={CLIENT_PATH} component={ManagePolicies} />
             <AuthorizeRoute exact path={`${CLIENT_PATH}/:id`} component={ManagePoliciesClient} />
+            <AuthorizeRoute exact path={`${CLIENT_PATH}/:id/delete/:policyId`} component={ManagePoliciesClient} />
             <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
           </Switch>
         </Layout>

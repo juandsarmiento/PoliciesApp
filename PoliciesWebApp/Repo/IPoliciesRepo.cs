@@ -20,5 +20,7 @@ namespace PoliciesWebApp.Repo
         void CancelPolicies(IEnumerable<PolicyClient> policyClients);
         IEnumerable<CoverageType> GetAllCoverages();
         IEnumerable<Client> GetAllClients();
+        void CancelPoliciesOfClient(long clientId, IEnumerable<long> policiesId);
+        void AssignPoliciesOfClient(long clientId, IEnumerable<long> policiesId);
     }
 }

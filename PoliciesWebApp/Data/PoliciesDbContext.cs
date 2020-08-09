@@ -12,6 +12,7 @@ namespace PoliciesWebApp.Data
             DbContextOptions options,
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
         {
+
         }
 
         public DbSet<Policy> Policies { get; set; }

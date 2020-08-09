@@ -24,7 +24,6 @@ const CreatePolicy = ({ isLoading, riskTypes, coverageTypes, actions }) => {
                 ? parseInt(e.target.value) : e.target.value
         };
         setNewPolicy(nextPolicyState);
-        console.log(nextPolicyState)
     }
     const handleToggle = (e,r) => {
         const newCoverages = [...newPolicy.policyCoverageTypes]
@@ -39,7 +38,6 @@ const CreatePolicy = ({ isLoading, riskTypes, coverageTypes, actions }) => {
             policyCoverageTypes:newCoverages
         }
         setNewPolicy(newPolictyState);
-        console.log(newPolictyState);
     }
     const handleSubmit = () => {
         actions.createNewPolicy(newPolicy)

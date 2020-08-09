@@ -2,7 +2,6 @@ import React from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
 
 const checkChecked = (r,policyCoverageTypes =[]) => {
-    console.log(policyCoverageTypes);
     if(policyCoverageTypes.findIndex(p => p === r.id) > -1){
         
         return true;
@@ -16,7 +15,7 @@ const FormPolicy = ({ policy,riskTypes, coverageTypes, onSubmit, onChange,toggle
         onSubmit();
     }
     const { name, coverage, coverageTime, policyCoverageTypes, startDate, price, riskId, description } = policy;
-    console.log(policyCoverageTypes);
+
     return (<Form onSubmit={handleSubmit}>
         <FormGroup>
             <Label for="name" sm={2}>Name</Label>

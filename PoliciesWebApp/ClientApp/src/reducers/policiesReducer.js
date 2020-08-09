@@ -118,7 +118,34 @@ const requestClients = () => (dispatch) => {
     })
     dispatch({ type: REQUEST_DATA });
 }
-
+const cancelPolicies = (clientId, policiesId) => (dispatch) => {
+    axios.patch(`${URL}/client/${clientId}/cancelpolicies`,{
+        policiesId
+    })
+    .then(resp => {
+    })
+    .catch((error) => {
+        dispatch({type: SET_ERROR,payload:error.response.data});
+        setTimeout(() =>{
+            dispatch({type: CLEAN_ERROR});
+        },timeout)
+    })
+    dispatch({ type: REQUEST_DATA });
+} 
+const addPolicies = (clientId, policiesId) => (dispatch) => {
+    axios.patch(`${URL}/client/${clientId}/assignpolicies`,{
+        policiesId
+    })
+    .then(resp => {
+    })
+    .catch((error) => {
+        dispatch({type: SET_ERROR,payload:error.response.data});
+        setTimeout(() =>{
+            dispatch({type: CLEAN_ERROR});
+        },timeout)
+    })
+    dispatch({ type: REQUEST_DATA });
+} 
 export const actionCreators = {
     requestPolicies,
     createNewPolicy,
@@ -126,7 +153,9 @@ export const actionCreators = {
     requestcoveragesTypes,
     updatePolicy,
     deletePolicy,
-    requestClients
+    requestClients,
+    cancelPolicies,
+    addPolicies
 }
 
 export const INITIAL_STATE = {

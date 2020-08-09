@@ -88,7 +88,24 @@ namespace PoliciesWebApp.Repo
         {
             _policiesDbContext.SaveChanges();
         }
+        public void CancelPoliciesOfClient(long clientId, IEnumerable<long> policiesId)
+        {
+            var _policiesId = policiesId.ToArray();
+            var policies = _policiesDbContext.PolicyClient
+                .Where(f => f.ClientId == clientId && _policiesId.Contains(f.PolicyId));
+            _policiesDbContext.RemoveRange(policies);
+            _policiesDbContext.SaveChanges();
+        }
+        public void AssignPoliciesOfClient(long clientId, IEnumerable<long> policiesId)
+        {
+            var _policiesId = policiesId.ToHashSet();
+            _policiesDbContext.PolicyClient.AddRange(policiesId.Select(p => new PolicyClient
+            {
+                PolicyId = p,
+                ClientId = clientId
+            }));
+            _policiesDbContext.SaveChanges();
 
-        
+        }
     }
 }
