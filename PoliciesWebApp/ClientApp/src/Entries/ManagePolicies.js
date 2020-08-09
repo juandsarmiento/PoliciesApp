@@ -9,7 +9,7 @@ const ManagePolicies = ({ clients }) => {
     }
     return (
     <Container>
-        <p>Select a client</p>
+        <h6>Select a client</h6>
         <Row className='justify-content-sm-center'>
             {
                 clients.map(c => <CardClient key={c.id} client={c} cols={3} onClick={handleClick}/>)

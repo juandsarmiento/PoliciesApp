@@ -66,7 +66,7 @@ const FormPolicy = ({ policy,riskTypes, coverageTypes, onSubmit, onChange,toggle
             <Label for="description" sm={2}>Descrip</Label>
             <Input type="textarea" name="description" id="description" value={description} onChange={onChange} />
         </FormGroup>
-        <Button>Submit</Button>
+        <Button className='btn btn-primary'>Submit</Button>
     </Form>);
 }
 

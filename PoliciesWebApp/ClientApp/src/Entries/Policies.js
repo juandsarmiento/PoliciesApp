@@ -36,7 +36,7 @@ const Policies = ({ policies, isLoading, actions }) => {
     return (
         <>
             <Container>
-                <h5>Policies</h5>
+                <h6>Policies</h6>
                 <PoliciesTable policies={policies} onDelete={handleDelete} />
             </Container>
         ReactDOM.createPortal(

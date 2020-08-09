@@ -4,10 +4,10 @@ using PoliciesWebApp.Models;
 using PoliciesWebApp.Repo;
 using PoliciesWebApp.DTOs;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 
+namespace PoliciesWebApp.Controllers { 
 
-namespace PoliciesWebApp.Controllers
-{
     [ApiController]
     [Route("api/[controller]")]
     public class PoliciesController : ControllerBase
